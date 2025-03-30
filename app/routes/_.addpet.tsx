@@ -32,7 +32,7 @@ export async function action({ request }: ActionFunctionArgs) {
     if (!image) {
       return { error: "Please upload an image." };
     }
-    console.log("image : ", image);
+    // console.log("image : ", image);
     try {
       const resCreatePet = await PetAPI.createPet(
         name,
@@ -46,19 +46,19 @@ export async function action({ request }: ActionFunctionArgs) {
         spayed,
         detail
       );
-      console.log("resCreatePet : ", resCreatePet);
+      // console.log("resCreatePet : ", resCreatePet);
       try {
         const resCreateAdoption = await AdoptionAPI.createAdoption(userId!, resCreatePet.pet_id);
-        console.log("resCreateAdoption : ", resCreateAdoption);
+        // console.log("resCreateAdoption : ", resCreateAdoption);
       } catch (error) {
-        console.error("Error creating adoption:", error);
+        // console.error("Error creating adoption:", error);
       }
       try {
         const resUploadImage = await ImageAPI.uploadImage(image, name);
         
-        console.log("resUploadImage : ", resUploadImage);
+        // console.log("resUploadImage : ", resUploadImage);
       } catch(error) {
-        console.error("Error uploading image:", error);
+        // console.error("Error uploading image:", error);
       }
 
       return redirect("/pets");
